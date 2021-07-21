@@ -64,7 +64,7 @@ We can start by taking a look at the `<main>` function. We can see that the firs
 
 We can start by setting a breakpoint at the `<create_password>` function by entering the command:
 ```
-b = create_password
+> b create_password
 ```
 
 After that we can start the execution of the program, step through the mov instructions all the way to the last mov instruction since the last one inserts a null byte at the end and finish by reading what's in the `register r15`. We can do all of this by entering the following commands:
