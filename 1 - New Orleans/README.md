@@ -60,7 +60,25 @@ dH{]ZMa
 
 ## Detailed solution
 We can start by taking a look at the `<main>` function. We can see that the first thing the function does is call the `<create_password>` function at the address `0x447e`. While looking at the `<create_password>` function, we can see that it inserts hexadecimal values into the register 15 (r15) at specific locations in order. We can than convert those hexadecimal values to ASCII which gives us the created password.
-
+```
+4438 <main>
+4438:  3150 9cff      add	#0xff9c, sp
+443c:  b012 7e44      call	#0x447e <create_password>
+...
+```
+```
+447e <create_password>
+447e:  3f40 0024      mov	#0x2400, r15
+4482:  ff40 6400 0000 mov.b	#0x64, 0x0(r15)
+4488:  ff40 4800 0100 mov.b	#0x48, 0x1(r15)
+448e:  ff40 7b00 0200 mov.b	#0x7b, 0x2(r15)
+4494:  ff40 5d00 0300 mov.b	#0x5d, 0x3(r15)
+449a:  ff40 5a00 0400 mov.b	#0x5a, 0x4(r15)
+44a0:  ff40 4d00 0500 mov.b	#0x4d, 0x5(r15)
+44a6:  ff40 6100 0600 mov.b	#0x61, 0x6(r15)
+44ac:  cf43 0700      mov.b	#0x0, 0x7(r15)
+44b0:  3041           ret
+```
 We can start by setting a breakpoint at the `<create_password>` function by entering the command:
 ```
 > b create_password
@@ -82,7 +100,7 @@ The output when we `read r15` is:
    2418:   0000 0000 0000 0000  ........
 ```
 ![Image 1](images/NewOrleans-1.PNG)
-We see that the password created is `dH{]ZMa`. We can then enter the command continue, let the function `<check_password>` check our password.
+We see that the password created is `dH{]ZMa`. We can then enter the command `continue`, let the function `<check_password>` check our password.
 ```
 > c
 ```
