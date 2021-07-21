@@ -63,7 +63,28 @@ We have to reverse the code to determine the password used to unlock the door.
 
 ## Detailed solution
 We can start by checking the dissambly code. In the `<main>` function, we call the `<get_password>`, which when looking at it, we can see that it takes our input and then returns it to after get stored in the r15 register. We see that there's also a `<check_password>` function like in the New Orleans challenge. This time, `<check_password>` compares parts of what's in the register r15 with hexadecimal values and then evaluates it with conditional jumps like `jnz` (Jump Not Zero) and `jne` (Jump Not Equal). 
-
+```
+4438 <main>
+4438:  3150 9cff      add	#0xff9c, sp
+443c:  3f40 b444      mov	#0x44b4 "Enter the password to continue.", r15
+4440:  b012 6645      call	#0x4566 <puts>
+4444:  0f41           mov	sp, r15
+4446:  b012 8044      call	#0x4480 <get_password>
+444a:  0f41           mov	sp, r15
+444c:  b012 8a44      call	#0x448a <check_password>
+4450:  0f93           tst	r15
+4452:  0520           jnz	#0x445e <main+0x26>
+4454:  3f40 d444      mov	#0x44d4 "Invalid password; try again.", r15
+4458:  b012 6645      call	#0x4566 <puts>
+445c:  093c           jmp	#0x4470 <main+0x38>
+445e:  3f40 f144      mov	#0x44f1 "Access Granted!", r15
+4462:  b012 6645      call	#0x4566 <puts>
+4466:  3012 7f00      push	#0x7f
+446a:  b012 0245      call	#0x4502 <INT>
+446e:  2153           incd	sp
+4470:  0f43           clr	r15
+4472:  3150 6400      add	#0x64, sp
+```
 We'll start by setting a breakpoint at `<check_password>` to step through the instructions and see what happens. We enter the command:
 ```
 > b check_password
