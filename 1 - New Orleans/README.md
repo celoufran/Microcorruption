@@ -1,4 +1,3 @@
-
 # Microcorruption: New Orleans
 ![Date](https://img.shields.io/badge/Date-July%2020th%202021-brightgreen)  
 ![Reverse Engineering Category](https://img.shields.io/badge/Category-Reverse_Engineering-lightgrey.svg)\
@@ -49,7 +48,7 @@ DETAILS
 ```
 
 ## Attached files
-- [NewOrleans.txt](NewOrleans.txt)
+- [NewOrleans.txt](NewOrleans.txt) (Deassembly code)
 
 ## Summary
 We have to reverse the code to determine the password used to unlock the door.
