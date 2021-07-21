@@ -85,6 +85,21 @@ We can start by checking the dissambly code. In the `<main>` function, we call t
 4470:  0f43           clr	r15
 4472:  3150 6400      add	#0x64, sp
 ```
+```
+448a <check_password>
+448a:  bf90 7c36 0000 cmp	#0x367c, 0x0(r15)
+4490:  0d20           jnz	$+0x1c
+4492:  bf90 5c55 0200 cmp	#0x555c, 0x2(r15)
+4498:  0920           jnz	$+0x14
+449a:  bf90 7a3b 0400 cmp	#0x3b7a, 0x4(r15)
+44a0:  0520           jne	#0x44ac <check_password+0x22>
+44a2:  1e43           mov	#0x1, r14
+44a4:  bf90 5230 0600 cmp	#0x3052, 0x6(r15)
+44aa:  0124           jeq	#0x44ae <check_password+0x24>
+44ac:  0e43           clr	r14
+44ae:  0f4e           mov	r14, r15
+44b0:  3041           ret
+```
 We'll start by setting a breakpoint at `<check_password>` to step through the instructions and see what happens. We enter the command:
 ```
 > b check_password
