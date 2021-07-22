@@ -168,7 +168,7 @@ At that point, we have the IO interrupt triggered to enter our password. We ente
 Door Unlocked.
 ```
 ![Sydney-3.PNG](images/Sydney-3.PNG)
-We now enter the command `solve to unlock the door and complete the challenge:
+We now enter the command `solve` to unlock the door and complete the challenge by using the password `|6\Uz;R0`:
 ```
 > solve
 ```
